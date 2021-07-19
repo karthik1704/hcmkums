@@ -1,5 +1,4 @@
 import csv
-from fileinput import filename
 from typing import Any
 import requests
 
@@ -11,7 +10,7 @@ candidate_numbers: list[str] = []
 AUTH = ('99999', 'pass')
 
 
-def download_attachment(items:list[Any]):
+def download_attachment(items: list[Any]):
     for item in items:
         file_path = item['FilePath']
         res = requests.get(f'{BASE_URL}{file_path}', auth=AUTH)
@@ -24,7 +23,7 @@ def get_items(candidate_numbers: list[str]) -> None:
     for number in candidate_numbers:
         res = requests.get(f'{BASE_URL}{number}{URL}', auth=AUTH)
         data = res.json()
-        items:list[Any] = data.get('items')
+        items: list[Any] = data.get('items')
         download_attachment(items)
 
 
